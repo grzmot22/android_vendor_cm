@@ -89,9 +89,7 @@ PRODUCT_COPY_FILES += \
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 
-# Proprietary latinime lib needed for Keyboard swyping
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
+
 # userinit support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
