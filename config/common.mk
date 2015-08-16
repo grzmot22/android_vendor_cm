@@ -88,6 +88,10 @@ PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/sysinit:system/bin/sysinit
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
+
+# Proprietary latinime lib needed for Keyboard swyping
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
 # userinit support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
@@ -113,9 +117,17 @@ PRODUCT_COPY_FILES += \
 # This is CM!
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
-
+# SuperSU
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
+    vendor/cm/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+# Blissful Wallpapers
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/blisspapers/BlissPapers.apk:system/app/BlissPapers/BlissPapers.apk
 # T-Mobile theme engine
 include vendor/cm/config/themes_common.mk
+# Bliss (V4A) Audio Mods
+-include vendor/cm/config/cm_audio_mod.mk
 
 # Required CM packages
 PRODUCT_PACKAGES += \
@@ -188,6 +200,21 @@ PRODUCT_PACKAGES += \
     ssh-keygen \
     start-ssh
 
+# Other packages
+PRODUCT_PACKAGES += \
+    KernelAdiutor \
+    OmniSwitch \
+    BlissPapers \
+    WallpaperPicker
+
+# Extra tools
+PRODUCT_PACKAGES += \
+    vim \
+    zip \
+    unrar
+# fstrim support
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/etc/init.d/98fstrim:system/etc/init.d/98fstrim
 # rsync
 PRODUCT_PACKAGES += \
     rsync
