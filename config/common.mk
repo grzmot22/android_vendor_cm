@@ -150,8 +150,8 @@ PRODUCT_PACKAGES += \
     Eleven \
     LockClock \
     CMHome \
-    CyanogenSetupWizard
-
+    CyanogenSetupWizard \
+		sms-backup-plus
 # CM Platform Library
 PRODUCT_PACKAGES += \
     org.cyanogenmod.platform-res \
