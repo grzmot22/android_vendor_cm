@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # V4A files
-ifeq (viper, $(BLISS_AUDIO_MOD))
+ifeq (viper, $(CM_AUDIO_MOD))
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/V4A/etc/audio_effects.conf:system/etc/audio_effects.conf \
     vendor/cm/prebuilt/V4A/etc/audio_policy.conf:system/etc/audio_policy.conf \
