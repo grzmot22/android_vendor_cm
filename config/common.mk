@@ -151,7 +151,8 @@ PRODUCT_PACKAGES += \
     LockClock \
     CMHome \
     CyanogenSetupWizard \
-		sms-backup-plus
+    sms-backup-plus \
+    SamsungServiceMode
 # CM Platform Library
 PRODUCT_PACKAGES += \
     org.cyanogenmod.platform-res \
