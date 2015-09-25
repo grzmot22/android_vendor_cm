@@ -108,6 +108,10 @@ PRODUCT_COPY_FILES += \
     vendor/bliss/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
     vendor/bliss/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
 
+# KernelAdiutor
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/KernelAdiutor/KernelAdiutor.apk:system/app/KernelAdiutor/KernelAdiutor.apk
+
 # Blissful Wallpapers
 PRODUCT_COPY_FILES += \
     vendor/bliss/prebuilt/blisspapers/BlissPapers.apk:system/app/BlissPapers/BlissPapers.apk
@@ -187,7 +191,6 @@ PRODUCT_PACKAGES += \
 
 # Other packages
 PRODUCT_PACKAGES += \
-    KernelAdiutor \
     OmniSwitch \
     BlissPapers \
     BlissOTA
