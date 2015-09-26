@@ -117,13 +117,20 @@ PRODUCT_COPY_FILES += \
 # This is CM!
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
+
 # SuperSU
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
     vendor/cm/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+
+# KernelAdiutor
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/KernelAdiutor/KernelAdiutor.apk:system/app/KernelAdiutor/KernelAdiutor.apk
+
 # Blissful Wallpapers
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/blisspapers/BlissPapers.apk:system/app/BlissPapers/BlissPapers.apk
+
 # T-Mobile theme engine
 include vendor/cm/config/themes_common.mk
 # Bliss (V4A) Audio Mods
@@ -144,6 +151,7 @@ PRODUCT_PACKAGES += \
 
 # Custom CM packages
 PRODUCT_PACKAGES += \
+	Snap \
     Launcher3 \
     Trebuchet \
     AudioFX \
@@ -155,8 +163,9 @@ PRODUCT_PACKAGES += \
     CyanogenSetupWizard \
     sms-backup-plus \
     SamsungServiceMode \
-    CMSettingsProvider
-
+    CMSettingsProvider \
+	MonthCalendarWidget
+	
 # CM Platform Library
 PRODUCT_PACKAGES += \
     org.cyanogenmod.platform-res \
@@ -238,6 +247,12 @@ PRODUCT_PACKAGES += \
     procmem \
     procrank \
     su
+endif
+
+# HFM Files
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/etc/xtwifi.conf:system/etc/xtwifi.conf
+
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
