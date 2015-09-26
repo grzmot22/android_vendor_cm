@@ -253,8 +253,6 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/bliss/prebuilt/etc/xtwifi.conf:system/etc/xtwifi.conf
 
-endif
-
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=1
 
