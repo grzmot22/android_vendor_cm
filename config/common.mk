@@ -125,7 +125,7 @@ PRODUCT_COPY_FILES += \
 
 # KernelAdiutor
 PRODUCT_COPY_FILES += \
-    vendor/bliss/prebuilt/KernelAdiutor/KernelAdiutor.apk:system/app/KernelAdiutor/KernelAdiutor.apk
+    vendor/cm/prebuilt/KernelAdiutor/KernelAdiutor.apk:system/app/KernelAdiutor/KernelAdiutor.apk
 
 # Blissful Wallpapers
 PRODUCT_COPY_FILES += \
