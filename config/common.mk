@@ -251,7 +251,7 @@ endif
 
 # HFM Files
 PRODUCT_COPY_FILES += \
-    vendor/bliss/prebuilt/etc/xtwifi.conf:system/etc/xtwifi.conf
+    vendor/cm/prebuilt/etc/xtwifi.conf:system/etc/xtwifi.conf
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=1
