@@ -126,9 +126,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
     vendor/cm/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
-# SuperSU
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
+
 # KernelAdiutor
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/KernelAdiutor/KernelAdiutor.apk:system/app/KernelAdiutor/KernelAdiutor.apk
@@ -230,9 +228,7 @@ PRODUCT_PACKAGES += \
     vim \
     zip \
     unrar
-# fstrim support
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/init.d/98fstrim:system/etc/init.d/98fstrim
+
 # rsync
 PRODUCT_PACKAGES += \
     rsync
