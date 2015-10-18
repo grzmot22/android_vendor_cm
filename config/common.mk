@@ -138,9 +138,11 @@ PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/blisspapers/BlissPapers.apk:system/app/BlissPapers/BlissPapers.apk
 
 # T-Mobile theme engine
-include vendor/cm/config/themes_common.mk
+#include vendor/cm/config/themes_common.mk
 # Bliss (V4A) Audio Mods
 -include vendor/cm/config/cm_audio_mod.mk
+
+
 
 # Required CM packages
 PRODUCT_PACKAGES += \
@@ -160,18 +162,17 @@ PRODUCT_PACKAGES += \
 	Snap \
     Launcher3 \
     Trebuchet \
-    AudioFX \
     CMWallpapers \
     CMFileManager \
     Eleven \
     LockClock \
     CMHome \
     CyanogenSetupWizard \
-    sms-backup-plus \
     SamsungServiceMode \
     CMSettingsProvider \
-	MonthCalendarWidget
-	
+# AudioFX 
+
+
 # CM Platform Library
 PRODUCT_PACKAGES += \
     org.cyanogenmod.platform-res \
@@ -238,14 +239,14 @@ PRODUCT_PACKAGES += \
     rsync
 
 # Stagefright FFMPEG plugin
-PRODUCT_PACKAGES += \
-    libffmpeg_extractor \
-    libffmpeg_omx \
-    media_codecs_ffmpeg.xml
+#PRODUCT_PACKAGES += \
+#    libffmpeg_extractor \
+#    libffmpeg_omx \
+#    media_codecs_ffmpeg.xml
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.sf.omx-plugin=libffmpeg_omx.so \
-    media.sf.extractor-plugin=libffmpeg_extractor.so
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    media.sf.omx-plugin=libffmpeg_omx.so \
+#    media.sf.extractor-plugin=libffmpeg_extractor.so
 
 # These packages are excluded from user builds
 ifneq ($(TARGET_BUILD_VARIANT),user)
@@ -264,8 +265,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/cm/overlay/common
 
-PRODUCT_VERSION_MAJOR = 12
-PRODUCT_VERSION_MINOR = 1
+PRODUCT_VERSION_MAJOR = 13
+PRODUCT_VERSION_MINOR = 0
 PRODUCT_VERSION_MAINTENANCE = 0-RC0
 
 # Set CM_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
@@ -316,7 +317,8 @@ ifeq ($(CM_BUILDTYPE), OPTIMIZED)
     endif
 endif
 
-CM_VERSION := OptimizedCM-12.1-$(shell date -u +%Y%m%d)
+
+CM_VERSION := OptimizedCM-13-$(shell date -u +%Y%m%d)
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.version=$(CM_VERSION) \
@@ -356,7 +358,7 @@ ifndef CM_PLATFORM_SDK_VERSION
   # the SDK are released.  It should only be incremented when the APIs for
   # the new release are frozen (so that developers don't write apps against
   # intermediate builds).
-  CM_PLATFORM_SDK_VERSION := 3
+  CM_PLATFORM_SDK_VERSION := 4
 endif
 
 ifndef CM_PLATFORM_REV
