@@ -159,20 +159,13 @@ PRODUCT_PACKAGES += \
     CMFileManager \
     Eleven \
     LockClock \
-<<<<<<< HEAD
     CMHome \
     CyanogenSetupWizard \
     SamsungServiceMode \
     CMSettingsProvider \
+	ExactCalculator
 # AudioFX 
 
-=======
-    CMUpdater \
-    CMAccount \
-    CyanogenSetupWizard \
-    CMSettingsProvider \
-    ExactCalculator
->>>>>>> 2395401e47b65a7ccff1ef8590a5d358d3a5bb0f
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
@@ -319,24 +312,22 @@ ifeq ($(CM_BUILDTYPE), OPTIMIZED)
     endif
 endif
 
-<<<<<<< HEAD
 
 CM_VERSION := OptimizedCM-13-$(shell date -u +%Y%m%d)
-=======
-ifeq ($(CM_BUILDTYPE), RELEASE)
-    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-        CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
-    else
-        ifeq ($(TARGET_BUILD_VARIANT),user)
-            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
-        else
-            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
-        endif
-    endif
-else
-    CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
-endif
->>>>>>> 2395401e47b65a7ccff1ef8590a5d358d3a5bb0f
+
+#ifeq ($(CM_BUILDTYPE), RELEASE)
+#    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
+#        CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+#    else
+#        ifeq ($(TARGET_BUILD_VARIANT),user)
+#            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+#        else
+#            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+#        endif
+#    endif
+#else
+#    CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+#endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.version=$(CM_VERSION) \
