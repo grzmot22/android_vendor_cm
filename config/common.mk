@@ -101,11 +101,6 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.local.rc:root/init.cm.rc
 
-# Bring in camera effects
-PRODUCT_COPY_FILES +=  \
-    vendor/cm/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
-    vendor/cm/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
-
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
@@ -123,26 +118,26 @@ PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
 # SuperSU
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
-    vendor/cm/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+#PRODUCT_COPY_FILES += \
+#    vendor/cm/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
+#    vendor/cm/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
 # SuperSU
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
 # KernelAdiutor
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/KernelAdiutor/KernelAdiutor.apk:system/app/KernelAdiutor/KernelAdiutor.apk
+#PRODUCT_COPY_FILES += \
+#    vendor/cm/prebuilt/KernelAdiutor/KernelAdiutor.apk:system/app/KernelAdiutor/KernelAdiutor.apk
 
 # Blissful Wallpapers
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/blisspapers/BlissPapers.apk:system/app/BlissPapers/BlissPapers.apk
+#PRODUCT_COPY_FILES += \
+#    vendor/cm/prebuilt/blisspapers/BlissPapers.apk:system/app/BlissPapers/BlissPapers.apk
 
-# T-Mobile theme engine
-#include vendor/cm/config/themes_common.mk
 # Bliss (V4A) Audio Mods
 -include vendor/cm/config/cm_audio_mod.mk
 
 
+# Theme engine
+include vendor/cm/config/themes_common.mk
 
 # Required CM packages
 PRODUCT_PACKAGES += \
@@ -152,8 +147,6 @@ PRODUCT_PACKAGES += \
 
 # Optional CM packages
 PRODUCT_PACKAGES += \
-    VoicePlus \
-    Basic \
     libemoji \
     Terminal
 
@@ -166,12 +159,20 @@ PRODUCT_PACKAGES += \
     CMFileManager \
     Eleven \
     LockClock \
+<<<<<<< HEAD
     CMHome \
     CyanogenSetupWizard \
     SamsungServiceMode \
     CMSettingsProvider \
 # AudioFX 
 
+=======
+    CMUpdater \
+    CMAccount \
+    CyanogenSetupWizard \
+    CMSettingsProvider \
+    ExactCalculator
+>>>>>>> 2395401e47b65a7ccff1ef8590a5d358d3a5bb0f
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
@@ -201,6 +202,7 @@ PRODUCT_PACKAGES += \
     mkfs.f2fs \
     fsck.f2fs \
     fibmap.f2fs \
+    mkntfs \
     ntfsfix \
     ntfs-3g \
     gdbserver \
@@ -247,13 +249,6 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PROPERTY_OVERRIDES += \
 #    media.sf.omx-plugin=libffmpeg_omx.so \
 #    media.sf.extractor-plugin=libffmpeg_extractor.so
-
-# TCM (TCP Connection Management)
-PRODUCT_PACKAGES += \
-    tcmiface
-
-PRODUCT_BOOT_JARS += \
-    tcmiface
 
 # These packages are excluded from user builds
 ifneq ($(TARGET_BUILD_VARIANT),user)
@@ -324,8 +319,24 @@ ifeq ($(CM_BUILDTYPE), OPTIMIZED)
     endif
 endif
 
+<<<<<<< HEAD
 
 CM_VERSION := OptimizedCM-13-$(shell date -u +%Y%m%d)
+=======
+ifeq ($(CM_BUILDTYPE), RELEASE)
+    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
+        CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+    else
+        ifeq ($(TARGET_BUILD_VARIANT),user)
+            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+        else
+            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+        endif
+    endif
+else
+    CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+endif
+>>>>>>> 2395401e47b65a7ccff1ef8590a5d358d3a5bb0f
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.version=$(CM_VERSION) \
