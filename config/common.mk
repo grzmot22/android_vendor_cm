@@ -61,15 +61,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.android.dataroaming=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.selinux=0
+    ro.build.selinux=1
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 # Thank you, please drive thru!
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
 endif
 
+ifneq ($(TARGET_BUILD_VARIANT),eng)
 # Enable ADB authentication
-ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
+endif
 
 # Copy over the changelog to the device
 PRODUCT_COPY_FILES += \
@@ -84,14 +86,16 @@ PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/blacklist:system/addon.d/blacklist
 endif
 
+# Signature compatibility validation
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
+
 # init.d support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
     vendor/cm/prebuilt/common/bin/sysinit:system/bin/sysinit
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
-
-
 # userinit support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
@@ -117,25 +121,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
-# SuperSU
-#PRODUCT_COPY_FILES += \
-#    vendor/cm/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
-#    vendor/cm/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
-# SuperSU
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
-# KernelAdiutor
-#PRODUCT_COPY_FILES += \
-#    vendor/cm/prebuilt/KernelAdiutor/KernelAdiutor.apk:system/app/KernelAdiutor/KernelAdiutor.apk
-
-# Blissful Wallpapers
-#PRODUCT_COPY_FILES += \
-#    vendor/cm/prebuilt/blisspapers/BlissPapers.apk:system/app/BlissPapers/BlissPapers.apk
-
-# Bliss (V4A) Audio Mods
--include vendor/cm/config/cm_audio_mod.mk
-
-
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
@@ -152,20 +137,18 @@ PRODUCT_PACKAGES += \
 
 # Custom CM packages
 PRODUCT_PACKAGES += \
-	Snap \
     Launcher3 \
     Trebuchet \
+    AudioFX \
     CMWallpapers \
     CMFileManager \
     Eleven \
     LockClock \
-    CMHome \
+    CMUpdater \
+    CMAccount \
     CyanogenSetupWizard \
-    SamsungServiceMode \
     CMSettingsProvider \
-	ExactCalculator
-# AudioFX 
-
+    ExactCalculator
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
@@ -218,34 +201,19 @@ PRODUCT_PACKAGES += \
     ssh-keygen \
     start-ssh
 
-# Other packages
-PRODUCT_PACKAGES += \
-    KernelAdiutor \
-    OmniSwitch \
-    BlissPapers \
-    WallpaperPicker
-
-# Extra tools
-PRODUCT_PACKAGES += \
-    vim \
-    zip \
-    unrar
-# fstrim support
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/init.d/98fstrim:system/etc/init.d/98fstrim
 # rsync
 PRODUCT_PACKAGES += \
     rsync
 
 # Stagefright FFMPEG plugin
-#PRODUCT_PACKAGES += \
-#    libffmpeg_extractor \
-#    libffmpeg_omx \
-#    media_codecs_ffmpeg.xml
+PRODUCT_PACKAGES += \
+    libffmpeg_extractor \
+    libffmpeg_omx \
+    media_codecs_ffmpeg.xml
 
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    media.sf.omx-plugin=libffmpeg_omx.so \
-#    media.sf.extractor-plugin=libffmpeg_extractor.so
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.sf.omx-plugin=libffmpeg_omx.so \
+    media.sf.extractor-plugin=libffmpeg_extractor.so
 
 # These packages are excluded from user builds
 ifneq ($(TARGET_BUILD_VARIANT),user)
@@ -255,12 +223,8 @@ PRODUCT_PACKAGES += \
     su
 endif
 
-# HFM Files
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/etc/xtwifi.conf:system/etc/xtwifi.conf
-
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.root_access=1
+    persist.sys.root_access=0
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/cm/overlay/common
 
@@ -278,7 +242,7 @@ ifndef CM_BUILDTYPE
     endif
 endif
 
-# Filter out random types, so it'll reset to OPTIMIZED
+# Filter out random types, so it'll reset to UNOFFICIAL
 ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(CM_BUILDTYPE)),)
     CM_BUILDTYPE :=
 endif
@@ -305,19 +269,16 @@ ifdef CM_BUILDTYPE
         endif
     endif
 else
-    # If CM_BUILDTYPE is not defined, set to OPTIMIZED
-    CM_BUILDTYPE := OPTIMIZED
+    # If CM_BUILDTYPE is not defined, set to UNOFFICIAL
+    CM_BUILDTYPE := UNOFFICIAL
     CM_EXTRAVERSION :=
 endif
 
-ifeq ($(CM_BUILDTYPE), OPTIMIZED)
-    ifneq ($(TARGET_OPTIMIZED_BUILD_ID),)
-        CM_EXTRAVERSION := -$(TARGET_OPTIMIZED_BUILD_ID)
+ifeq ($(CM_BUILDTYPE), UNOFFICIAL)
+    ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
+        CM_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
     endif
 endif
-
-
-#CM_VERSION := OptimizedCM-13-$(shell date -u +%Y%m%d)
 
 ifeq ($(CM_BUILDTYPE), RELEASE)
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
@@ -335,6 +296,7 @@ endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.version=$(CM_VERSION) \
+  ro.cm.releasetype=$(CM_BUILDTYPE) \
   ro.modversion=$(CM_VERSION) \
   ro.cmlegal.url=https://cyngn.com/legal/privacy-policy
 
@@ -344,7 +306,7 @@ CM_DISPLAY_VERSION := $(CM_VERSION)
 
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
-  ifneq ($(CM_BUILDTYPE), OPTIMIZED)
+  ifneq ($(CM_BUILDTYPE), UNOFFICIAL)
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
       ifneq ($(CM_EXTRAVERSION),)
         # Remove leading dash from CM_EXTRAVERSION
