@@ -120,9 +120,11 @@ PRODUCT_COPY_FILES += \
 # This is CM!
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
-# SuperSU		
+# SuperSU
 PRODUCT_COPY_FILES += \		
     vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
+# Bliss (V4A) Audio Mods
+-include vendor/cm/config/cm_audio_mod.mk
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
