@@ -120,7 +120,9 @@ PRODUCT_COPY_FILES += \
 # This is CM!
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
-
+# SuperSU		
+PRODUCT_COPY_FILES += \		
+    vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
@@ -144,10 +146,9 @@ PRODUCT_PACKAGES += \
     CMFileManager \
     Eleven \
     LockClock \
-    CMUpdater \
-    CMAccount \
     CyanogenSetupWizard \
     CMSettingsProvider \
+    SamsungServiceMode \
     ExactCalculator
 
 # CM Platform Library
@@ -224,7 +225,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.root_access=0
+    persist.sys.root_access=1
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/cm/overlay/common
 
@@ -269,14 +270,14 @@ ifdef CM_BUILDTYPE
         endif
     endif
 else
-    # If CM_BUILDTYPE is not defined, set to UNOFFICIAL
-    CM_BUILDTYPE := UNOFFICIAL
+    # If CM_BUILDTYPE is not defined, set to OPTIMIZED
+    CM_BUILDTYPE := OPTIMIZED
     CM_EXTRAVERSION :=
 endif
 
-ifeq ($(CM_BUILDTYPE), UNOFFICIAL)
+ifeq ($(CM_BUILDTYPE), OPTIMIZED)
     ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-        CM_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
+        CM_EXTRAVERSION := -$(TARGET_OPTIMIZED_BUILD_ID)
     endif
 endif
 
@@ -306,7 +307,7 @@ CM_DISPLAY_VERSION := $(CM_VERSION)
 
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
-  ifneq ($(CM_BUILDTYPE), UNOFFICIAL)
+  ifneq ($(CM_BUILDTYPE), OPTIMIZED)
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
       ifneq ($(CM_EXTRAVERSION),)
         # Remove leading dash from CM_EXTRAVERSION
