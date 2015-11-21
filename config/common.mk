@@ -68,10 +68,10 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
 endif
 
-ifneq ($(TARGET_BUILD_VARIANT),eng)
+
 # Enable ADB authentication
-ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
-endif
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+
 
 # Copy over the changelog to the device
 PRODUCT_COPY_FILES += \
@@ -85,10 +85,6 @@ PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/50-cm.sh:system/addon.d/50-cm.sh \
     vendor/cm/prebuilt/common/bin/blacklist:system/addon.d/blacklist
 endif
-
-# Signature compatibility validation
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
 
 # init.d support
 PRODUCT_COPY_FILES += \
