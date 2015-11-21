@@ -121,7 +121,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 # SuperSU
-PRODUCT_COPY_FILES += \		
+PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
 # Bliss (V4A) Audio Mods
 -include vendor/cm/config/cm_audio_mod.mk
