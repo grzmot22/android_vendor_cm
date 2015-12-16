@@ -15,8 +15,6 @@
 # V4A files
 ifeq (viper, $(CM_AUDIO_MOD))
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/V4A/etc/audio_effects.conf:system/etc/audio_effects.conf \
-    vendor/cm/prebuilt/V4A/etc/audio_policy.conf:system/etc/audio_policy.conf \
     vendor/cm/prebuilt/V4A/lib/soundfx/libaudiopreprocessing.so:system/lib/soundfx/libaudiopreprocessing.so \
     vendor/cm/prebuilt/V4A/lib/soundfx/libbundlewrapper.so:system/lib/soundfx/libbundlewrapper.so \
     vendor/cm/prebuilt/V4A/lib/soundfx/libdownmix.so:system/lib/soundfx/libdownmix.so \
@@ -27,8 +25,7 @@ PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/V4A/lib/soundfx/libreverbwrapper.so:system/lib/soundfx/libreverbwrapper.so \
     vendor/cm/prebuilt/V4A/lib/soundfx/libv4a_fx_ics.so:system/lib/soundfx/libv4a_fx_ics.so \
     vendor/cm/prebuilt/V4A/lib/soundfx/libvisualizer.so:system/lib/soundfx/libvisualizer.so \
-    vendor/cm/prebuilt/V4A/priv-app/ViPER4Android/ViPER4Android.apk:system/priv-app/ViPER4Android/ViPER4Android.apk \
-    vendor/cm/prebuilt/V4A/vendor/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf
+    vendor/cm/prebuilt/V4A/priv-app/ViPER4Android/ViPER4Android.apk:system/priv-app/ViPER4Android/ViPER4Android.apk 
 else
 # AudioFX
 PRODUCT_PACKAGES += \
