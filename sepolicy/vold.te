@@ -10,6 +10,7 @@ allow vold fuse_device:chr_file rw_file_perms;
 # NTFS-3g wants to drop permission
 allow vold self:capability { setgid setuid };
 
+<<<<<<< HEAD
 # Vold can also run as minivold in the rootfs
 recovery_only(`
   allow vold rootfs:dir { add_name write };
@@ -20,3 +21,6 @@ allow vold persist_file:dir { getattr read open ioctl };
 # Allow vold to execute mkfs
 allow vold mkfs_exec:file { execute read open execute_no_trans };
 
+=======
+allow vold persist_file:dir { getattr read open ioctl };
+>>>>>>> 4544aed... Fixed sysinit
