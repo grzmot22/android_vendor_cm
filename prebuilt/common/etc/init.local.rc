@@ -128,7 +128,6 @@ on boot
     # Persistent properties (only created if persist exists)
     mkdir /persist/properties 0770 system system
 
-<<<<<<< HEAD
 # adb over network
 on property:adb.network.port=*
     setprop service.adb.tcp.port ${adb.network.port}
@@ -147,14 +146,11 @@ on property:sys.io.scheduler=*
 on property:persist.sys.io.scheduler=*
     setprop sys.io.scheduler ${persist.sys.io.scheduler}
 
-=======
->>>>>>> 4544aed... Fixed sysinit
 # sysinit (/system/etc/init.d)
 service sysinit /system/bin/sysinit
     user root
     oneshot
     disabled
-<<<<<<< HEAD
 
 # Set slice_idle to 0 for BFQ
 on property:sys.io.scheduler=bfq
@@ -166,5 +162,3 @@ service bugreport /system/bin/dumpstate -d -p -B \
     oneshot
     disabled
     keycodes 114 115 116
-=======
->>>>>>> 4544aed... Fixed sysinit
