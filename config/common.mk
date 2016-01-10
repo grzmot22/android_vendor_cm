@@ -133,6 +133,9 @@ PRODUCT_COPY_FILES += \
 # SuperSU
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
+# ViPER|Atmos™ Dark
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/V4A/ViPERAtmos_Dark.zip:system/V4A/ViPERAtmos_Dark.zip
 # Bliss (V4A) Audio Mods
 -include vendor/cm/config/cm_audio_mod.mk
 # Theme engine
