@@ -1,5 +1,6 @@
 PRODUCT_BRAND ?= cyanogenmod
 
+<<<<<<< HEAD
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 #check device aspect ratio (tablet or phone) to import full screen bootanimation where appropriate
 ifeq ($(SCREEN_RATIO_PROPORTIONATE),true)
@@ -42,6 +43,8 @@ PRODUCT_BOOTANIMATION := vendor/cm/prebuilt/common/bootanimation/$(TARGET_BOOTAN
 endif
 endif
 
+=======
+>>>>>>> d7998064b54df0343e132f46d31faf975a126081
 ifdef CM_NIGHTLY
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rommanager.developerid=cyanogenmodnightly
@@ -77,10 +80,8 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
 endif
 
-
-# Enable ADB authentication
+# Disable ADB authentication
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
-
 
 # Copy over the changelog to the device
 PRODUCT_COPY_FILES += \
@@ -99,7 +100,7 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/97-backup.sh:system/addon.d/97-backup.sh \
     vendor/cm/prebuilt/common/etc/backup.conf:system/etc/backup.conf 
-
+    
 # init.d support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
@@ -262,7 +263,7 @@ ifndef CM_BUILDTYPE
     endif
 endif
 
-# Filter out random types, so it'll reset to UNOFFICIAL
+# Filter out random types, so it'll reset to OPTIMIZED
 ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(CM_BUILDTYPE)),)
     CM_BUILDTYPE :=
 endif
@@ -295,28 +296,15 @@ else
 endif
 
 ifeq ($(CM_BUILDTYPE), OPTIMIZED)
-    ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
+    ifneq ($(TARGET_OPTIMIZED_BUILD_ID),)
         CM_EXTRAVERSION := -$(TARGET_OPTIMIZED_BUILD_ID)
     endif
 endif
 
-ifeq ($(CM_BUILDTYPE), RELEASE)
-    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-        CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
-    else
-        ifeq ($(TARGET_BUILD_VARIANT),user)
-            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
-        else
-            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
-        endif
-    endif
-else
-    CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
-endif
+CM_VERSION := OptimizedCM-13-$(shell date -u +%Y%m%d)
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.version=$(CM_VERSION) \
-  ro.cm.releasetype=$(CM_BUILDTYPE) \
   ro.modversion=$(CM_VERSION) \
   ro.cmlegal.url=https://cyngn.com/legal/privacy-policy
 
