@@ -101,8 +101,6 @@ PRODUCT_COPY_FILES += \
 # ViPER|Atmos™ Dark
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/V4A/v4a.zip:system/v4a/v4a.zip
-# Bliss (V4A) Audio Mods
--include vendor/cm/config/cm_audio_mod.mk
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
