@@ -95,12 +95,18 @@ endif
 # This is CM!
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
+
 # SuperSU
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
 # ViPER|Atmos™ Dark
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/V4A/v4a.zip:system/v4a/v4a.zip
+
+# Live lockscreen
+PRODUCT_COPY_FILES += \
+    vendor/cm/config/permissions/org.cyanogenmod.livelockscreen.xml:system/etc/permissions/org.cyanogenmod.livelockscreen.xml
+
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
