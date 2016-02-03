@@ -140,10 +140,6 @@ PRODUCT_COPY_FILES += \
    vendor/cm/prebuilt/common/app/Viper4Android/Viper4Android.apk:system/priv-app/Viper4Android/Viper4Android.apk
 endif
 
-# APP REMOVAL SCRIPT
-PRODUCT_COPY_FILES += \
-   vendor/cm/prebuilt/common/addon.d/60-removal.sh:system/addon.d/60-removal.sh
-
 # This is CM!
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
