@@ -169,7 +169,8 @@ PRODUCT_PACKAGES += \
     CyanogenSetupWizard \
     CMSettingsProvider \
     SamsungServiceMode \
-    ExactCalculator
+    ExactCalculator \
+    LiveLockScreenService
 
 # Exchange support
 PRODUCT_PACKAGES += \
