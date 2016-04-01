@@ -170,7 +170,8 @@ PRODUCT_PACKAGES += \
     CMSettingsProvider \
     SamsungServiceMode \
     ExactCalculator \
-    LiveLockScreenService
+    LiveLockScreenService \
+    WeatherProvider
 
 # Exchange support
 PRODUCT_PACKAGES += \
