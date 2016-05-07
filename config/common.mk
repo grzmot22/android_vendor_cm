@@ -171,8 +171,10 @@ PRODUCT_PACKAGES += \
     SamsungServiceMode \
     ExactCalculator \
     LiveLockScreenService \
-    WeatherProvider
-
+    WeatherProvider \
+	OpenWeatherMapProvider \
+	WundergroundWeatherProvider
+	
 # Exchange support
 PRODUCT_PACKAGES += \
     Exchange2
