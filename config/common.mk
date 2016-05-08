@@ -173,7 +173,8 @@ PRODUCT_PACKAGES += \
     LiveLockScreenService \
     WeatherProvider \
 	OpenWeatherMapProvider \
-	WundergroundWeatherProvider
+	WundergroundWeatherProvider \
+	YahooWeatherProvider
 	
 # Exchange support
 PRODUCT_PACKAGES += \
