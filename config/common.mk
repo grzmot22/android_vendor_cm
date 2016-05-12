@@ -174,8 +174,9 @@ PRODUCT_PACKAGES += \
     WeatherProvider \
 	OpenWeatherMapProvider \
 	WundergroundWeatherProvider \
-	YahooWeatherProvider
-	
+	YahooWeatherProvider \
+    DataUsageProvider
+    
 # Exchange support
 PRODUCT_PACKAGES += \
     Exchange2
