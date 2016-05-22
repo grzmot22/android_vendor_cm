@@ -111,7 +111,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
 
-ifeq ($(TARGET_ARCH),arm)
+ifneq ($(TARGET_ARCH),arm64)
 # Viper4Android
 PRODUCT_COPY_FILES += \
    vendor/cm/prebuilt/common/bin/audio_policy.sh:system/audio_policy.sh \
