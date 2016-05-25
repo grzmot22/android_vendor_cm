@@ -300,7 +300,8 @@ CM_VERSION := OptimizedCM-13-$(shell date -u +%Y%m%d)
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.version=$(CM_VERSION) \
-  ro.modversion=$(CM_VERSION) \
+  ro.cm.releasetype=$(CM_BUILDTYPE) \
+  ro.modversion=cm-$(CM_VERSION) \
   ro.cmlegal.url=https://cyngn.com/legal/privacy-policy
 
 -include vendor/cm-priv/keys/keys.mk
