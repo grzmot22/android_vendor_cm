@@ -162,7 +162,6 @@ PRODUCT_PACKAGES += \
     AudioFX \
     CMWallpapers \
     CMFileManager \
-    Eleven \
     LockClock \
     CyanogenSetupWizard \
     CMSettingsProvider \
