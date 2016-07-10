@@ -82,10 +82,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
 
-# Signature compatibility validation
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
-
 # LCD density backup
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/97-backup.sh:system/addon.d/97-backup.sh \
