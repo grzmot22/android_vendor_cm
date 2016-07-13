@@ -82,6 +82,10 @@ PRODUCT_COPY_FILES += \
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
+# Backup Services whitelist
+PRODUCT_COPY_FILES += \
+    vendor/cm/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
+
 # CMSDK
 include vendor/cm/config/cmsdk_common.mk
 
