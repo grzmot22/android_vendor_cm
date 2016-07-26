@@ -1,6 +1,0 @@
-#!/system/bin/sh 
-
-fstrim -v /system 
-fstrim -v /cache 
-fstrim -v /data 
-sync

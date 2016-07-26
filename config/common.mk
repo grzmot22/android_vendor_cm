@@ -1,34 +1,5 @@
 PRODUCT_BRAND ?= cyanogenmod
 
-#check device aspect ratio (tablet or phone) to import full screen bootanimation where appropriate
-ifdef SCREEN_RATIO_PROPORTIONATE
-ifeq ($(SCREEN_RATIO_PROPORTIONATE),true)
-# Set bootanimation size to width to differentiate between tablet and phone devices for aspect ratio
-TARGET_BOOTANIMATION_SIZE := $(TARGET_SCREEN_WIDTH)
-endif
-else
-# determine the smaller dimension
-TARGET_BOOTANIMATION_SIZE := $(shell \
-	if [ $(TARGET_SCREEN_WIDTH) -lt $(TARGET_SCREEN_HEIGHT) ]; then \
-    echo $(TARGET_SCREEN_WIDTH); \
-  else \
-    echo $(TARGET_SCREEN_HEIGHT); \
-  fi )
-endif
-
-TARGET_BOOTANIMATION_NAME := $(TARGET_BOOTANIMATION_SIZE)
-
-ifdef SCREEN_RATIO_PROPORTIONATE
-ifeq ($(SCREEN_RATIO_PROPORTIONATE),true)
-PRODUCT_BOOTANIMATION := vendor/cm/prebuilt/common/bootanimation/$(TARGET_SCREEN_ASPECT_RATIO)/$(TARGET_BOOTANIMATION_NAME).zip
-endif
-else
-PRODUCT_BOOTANIMATION := vendor/cm/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip
-endif
-ifeq ($(TARGET_BOOTANIMATION_HALF_RES),true)
-PRODUCT_BOOTANIMATION := vendor/cm/prebuilt/common/bootanimation/halfres/$(TARGET_BOOTANIMATION_NAME).zip
-endif
-
 ifdef CM_NIGHTLY
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rommanager.developerid=cyanogenmodnightly
@@ -86,7 +57,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/97-backup.sh:system/addon.d/97-backup.sh \
     vendor/cm/prebuilt/common/etc/backup.conf:system/etc/backup.conf 
-    
+
 # init.d support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/sysinit:system/bin/sysinit
@@ -122,18 +93,14 @@ PRODUCT_COPY_FILES += \
    vendor/cm/prebuilt/common/app/Viper4Android/Viper4Android.apk:system/priv-app/Viper4Android/Viper4Android.apk
 endif
 
+# APP REMOVAL SCRIPT
+PRODUCT_COPY_FILES += \
+   vendor/cm/prebuilt/common/addon.d/60-removal.sh:system/addon.d/60-removal.sh
+
 # This is CM!
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
-# SuperSU
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/supersu/supersu.zip:system/supersu/supersu.zip
-
-# Live lockscreen
-PRODUCT_COPY_FILES += \
-    vendor/cm/config/permissions/org.cyanogenmod.livelockscreen.xml:system/etc/permissions/org.cyanogenmod.livelockscreen.xml
-    
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
@@ -175,15 +142,11 @@ PRODUCT_PACKAGES += \
     LockClock \
     CyanogenSetupWizard \
     CMSettingsProvider \
-    SamsungServiceMode \
     ExactCalculator \
     LiveLockScreenService \
     WeatherProvider \
-	OpenWeatherMapProvider \
-	WundergroundWeatherProvider \
-	YahooWeatherProvider \
     DataUsageProvider
-    
+
 # Exchange support
 PRODUCT_PACKAGES += \
     Exchange2
