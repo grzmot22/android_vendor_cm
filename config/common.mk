@@ -183,7 +183,7 @@ PRODUCT_PACKAGES += \
     ExactCalculator \
     LiveLockScreenService \
     WeatherProvider \
-    DataUsageProvider
+    DataUsageProvider \
 	OpenWeatherMapProvider \
 	WundergroundWeatherProvider \
 	SamsungServiceMode
